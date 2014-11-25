@@ -63,6 +63,7 @@
                 <key>installs_item_paths</key>
                 <array>
                     <string>/usr/local/munki/postflight</string>
+                    <string>/usr/local/munki/preflight</string>
                     <string>/usr/local/munki/postflight.d/sal-postflight</string>
                     <string>/usr/local/sal/yaml/__init__.py</string>
                     <string>/usr/local/sal/yaml/composer.py</string>
