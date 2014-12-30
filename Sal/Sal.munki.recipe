@@ -6,7 +6,7 @@
     <string>Downloads the current release of AutoDMG from Github and imports into Munki.
     </string>
     <key>Identifier</key>
-    <string>com.github.grahamgilbert.munki.Sal</string>
+    <string>com.github.grahamgilbert.Sal.munki</string>
     <key>Input</key>
     <dict>
         <key>MUNKI_REPO_SUBDIR</key>

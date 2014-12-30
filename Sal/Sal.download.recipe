@@ -6,7 +6,7 @@
     <string>Downloads the current release of Sal client scripts from Github.
     </string>
     <key>Identifier</key>
-    <string>com.github.grahamgilbert.download.Sal</string>
+    <string>com.github.grahamgilbert.Sal.download</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
