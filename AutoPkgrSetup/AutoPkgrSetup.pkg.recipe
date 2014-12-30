@@ -11,13 +11,59 @@
     <dict>
         <key>NAME</key>
         <string>AutoPkgrSetup</string>
-        <key>VERSION</key>
-        <string>0.0.1</string>
+        <key>URL</key>
+        <string>https://github.com/grahamgilbert/autopkg-recipes/tree/master/AutoPkgrSetup</string>
     </dict>
     <key>MinimumVersion</key>
     <string>0.2.1</string>
     <key>Process</key>
     <array>
+        <dict>
+            <key>Comment</key>
+            <string>Download version plist</string>
+            <key>Processor</key>
+            <string>URLDownloader</string>
+            <key>Arguments</key>
+            <dict>
+                <key>url</key>
+                <string>%URL%/version.plist</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Comment</key>
+            <string>Download launchagent</string>
+            <key>Processor</key>
+            <string>URLDownloader</string>
+            <key>Arguments</key>
+            <dict>
+                <key>url</key>
+                <string>%URL%/com.grahamgilbert.autopkgrsetup.plist</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Comment</key>
+            <string>Download script</string>
+            <key>Processor</key>
+            <string>URLDownloader</string>
+            <key>Arguments</key>
+            <dict>
+                <key>url</key>
+                <string>%URL%/AutoPkgrSetup.sh</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Comment</key>
+            <string>Extract a version string from version.plist to use for the package.</string>
+            <key>Arguments</key>
+            <dict>
+                <key>input_plist_path</key>
+                <string>%RECIPE_CACHE_DIR%/downloads/version.plist</string>
+                <key>plist_version_key</key>
+                <string>Version</string>
+            </dict>
+            <key>Processor</key>
+            <string>Versioner</string>
+        </dict>
         <dict>
             <key>Comment</key>
             <string>Create a pkg root.</string>
@@ -50,7 +96,7 @@
             <key>Arguments</key>
             <dict>
                 <key>source_path</key>
-                <string>com.grahamgilbert.AutoPkgrSetup.plist</string>
+                <string>%RECIPE_CACHE_DIR%/downloads/com.grahamgilbert.AutoPkgrSetup.plist</string>
                 <key>destination_path</key>
                 <string>%pkgroot%/Library/LaunchAgents/com.grahamgilbert.AutoPkgrSetup.plist</string>
                 <key>overwrite</key>
@@ -65,7 +111,7 @@
             <key>Arguments</key>
             <dict>
                 <key>source_path</key>
-                <string>AutoPkgrSetup.sh</string>
+                <string>%RECIPE_CACHE_DIR%/downloads/AutoPkgrSetup.sh</string>
                 <key>destination_path</key>
                 <string>%pkgroot%/usr/local/bin/AutoPkgrSetup.sh</string>
                 <key>overwrite</key>
