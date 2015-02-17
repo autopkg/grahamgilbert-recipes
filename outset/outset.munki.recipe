@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the current release of AutoDMG from Github and imports into Munki.
+    <string>Downloads the current release of Outset from Github and imports into Munki.
     </string>
     <key>Identifier</key>
     <string>com.github.grahamgilbert.munki.outset</string>
@@ -25,6 +25,8 @@
             <string>%NAME%</string>
             <key>unattended_install</key>
             <true/>
+            <key>minimum_os_version</key>
+            <string>10.9.0</string>
         </dict>
     </dict>
     <key>MinimumVersion</key>

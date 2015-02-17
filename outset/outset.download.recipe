@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the current release of outset from Github.</string>
+    <string>Downloads the current release of Outset from Github.</string>
     <key>Identifier</key>
     <string>com.github.grahamgilbert.download.outset</string>
     <key>Input</key>

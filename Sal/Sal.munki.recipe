@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the current release of AutoDMG from Github and imports into Munki.
+    <string>Downloads the current release of Sal client scripts from Github and imports into Munki.
     </string>
     <key>Identifier</key>
     <string>com.github.grahamgilbert.Sal.munki</string>
