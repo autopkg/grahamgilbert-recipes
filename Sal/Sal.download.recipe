@@ -21,7 +21,7 @@
             <key>Arguments</key>
             <dict>
                 <key>github_repo</key>
-                <string>salopensource/sal</string>
+                <string>salopensource/sal-scripts</string>
             </dict>
         </dict>
         <dict>
