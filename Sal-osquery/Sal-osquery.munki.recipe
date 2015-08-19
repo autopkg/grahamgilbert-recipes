@@ -67,13 +67,6 @@
             <key>Processor</key>
             <string>PathDeleter</string>
         </dict>
-                <dict>
-            <key>Processor</key>
-            <string>MunkiPkginfoMerger</string>
-            <key>Arguments</key>
-            <dict>
-            </dict>
-        </dict>
 
         <dict>
             <key>Arguments</key>
