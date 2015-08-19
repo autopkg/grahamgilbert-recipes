@@ -3,16 +3,16 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the current release of Sal client scripts from Github and imports into Munki.
+    <string>Downloads the current release of the Sal-osquery package from Github and imports into Munki.
     </string>
     <key>Identifier</key>
-    <string>com.github.grahamgilbert.Sal.munki</string>
+    <string>com.github.grahamgilbert.Sal-osquery.munki</string>
     <key>Input</key>
     <dict>
         <key>MUNKI_REPO_SUBDIR</key>
         <string>config/sal</string>
         <key>NAME</key>
-        <string>sal_scripts</string>
+        <string>sal-osquery</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -20,7 +20,7 @@
                 <string>testing</string>
             </array>
             <key>description</key>
-            <string>Client side scripts for Sal.</string>
+            <string>osquery configuration for Sal.</string>
             <key>name</key>
             <string>%NAME%</string>
             <key>unattended_install</key>
@@ -30,7 +30,7 @@
     <key>MinimumVersion</key>
     <string>0.2.0</string>
     <key>ParentRecipe</key>
-    <string>com.github.grahamgilbert.Sal.download</string>
+    <string>com.github.grahamgilbert.Sal-osquert.download</string>
     <key>Process</key>
     <array>
         <dict>
@@ -54,41 +54,6 @@
             </dict>
             <key>Processor</key>
             <string>PkgPayloadUnpacker</string>
-        </dict>
-        <dict>
-            <key>Arguments</key>
-            <dict>
-                <key>faux_root</key>
-                <string>%RECIPE_CACHE_DIR%/payload</string>
-                <key>installs_item_paths</key>
-                <array>
-                    <string>/usr/local/munki/postflight</string>
-                    <string>/usr/local/munki/preflight</string>
-                    <string>/usr/local/munki/postflight.d/sal-postflight</string>
-                    <string>/usr/local/munki/postflight.d/sal-preflight</string>
-                    <string>/usr/local/sal/yaml/__init__.py</string>
-                    <string>/usr/local/sal/yaml/composer.py</string>
-                    <string>/usr/local/sal/yaml/constructor.py</string>
-                    <string>/usr/local/sal/yaml/cyaml.py</string>
-                    <string>/usr/local/sal/yaml/dumper.py</string>
-                    <string>/usr/local/sal/yaml/emitter.py</string>
-                    <string>/usr/local/sal/yaml/error.py</string>
-                    <string>/usr/local/sal/yaml/events.py</string>
-                    <string>/usr/local/sal/yaml/loader.py</string>
-                    <string>/usr/local/sal/yaml/nodes.py</string>
-                    <string>/usr/local/sal/yaml/parser.py</string>
-                    <string>/usr/local/sal/yaml/reader.py</string>
-                    <string>/usr/local/sal/yaml/representer.py</string>
-                    <string>/usr/local/sal/yaml/resolver.py</string>
-                    <string>/usr/local/sal/yaml/scanner.py</string>
-                    <string>/usr/local/sal/yaml/serializer.py</string>
-                    <string>/usr/local/sal/yaml/tokens.py</string>
-                    <string>/usr/local/sal/salgurl.py</string>
-                    <string>/usr/local/sal/utils.py</string>
-                </array>
-            </dict>
-            <key>Processor</key>
-            <string>MunkiInstallsItemsCreator</string>
         </dict>
         <dict>
             <key>Arguments</key>
