@@ -25,6 +25,14 @@
             <string>%NAME%</string>
             <key>unattended_install</key>
             <true/>
+            <key>update_for</key>
+            <array>
+                <string>sal_scripts</string>
+            </array>
+            <key>requires</key>
+            <array>
+                <string>osquery</string>
+            </array>
         </dict>
     </dict>
     <key>MinimumVersion</key>
