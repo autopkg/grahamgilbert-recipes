@@ -83,7 +83,6 @@
                     <string>/usr/local/sal/yaml/scanner.py</string>
                     <string>/usr/local/sal/yaml/serializer.py</string>
                     <string>/usr/local/sal/yaml/tokens.py</string>
-                    <string>/usr/local/sal/salgurl.py</string>
                     <string>/usr/local/sal/utils.py</string>
                 </array>
             </dict>
