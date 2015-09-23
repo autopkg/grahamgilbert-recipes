@@ -1,0 +1,1 @@
+This recipe requires the [hansen-m-recipes](https://github.com/autopkg/hansen-m-recipes/tree/master/Blackboard) repo to be added to your AutoPkg machine, and because it needs to be installed for Each Damn User, it requires [outset](https://github.com/autopkg/grahamgilbert-recipes/tree/master/outset) which will copy it to ``~/Applications`` at the user's next login.
