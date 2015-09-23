@@ -10,7 +10,7 @@
     <key>Input</key>
     <dict>
         <key>MUNKI_REPO_SUBDIR</key>
-        <string>Blackboard/BlackboardCollaborateLauncher</string>
+        <string>apps/Blackboard/BlackboardCollaborateLauncher</string>
         <key>NAME</key>
         <string>BlackboardCollaborateLauncher</string>
         <key>pkginfo</key>
