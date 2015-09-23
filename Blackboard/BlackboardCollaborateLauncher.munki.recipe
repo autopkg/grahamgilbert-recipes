@@ -10,7 +10,7 @@
     <key>Input</key>
     <dict>
         <key>MUNKI_REPO_SUBDIR</key>
-        <string>config/sal</string>
+        <string>Blackboard/BlackboardCollaborateLauncher</string>
         <key>NAME</key>
         <string>BlackboardCollaborateLauncher</string>
         <key>pkginfo</key>
@@ -32,14 +32,14 @@
     <key>MinimumVersion</key>
     <string>0.2.0</string>
     <key>ParentRecipe</key>
-    <string>com.github.grahamgilbert.BlackboardCollaborate.pkg</string>
+    <string>com.github.grahamgilbert.BlackboardCollaborateLauncher.pkg</string>
     <key>Process</key>
     <array>
         <dict>
             <key>Arguments</key>
             <dict>
                 <key>flat_pkg_path</key>
-                <string>%pathname%</string>
+                <string>%pkg_path%</string>
                 <key>destination_path</key>
                 <string>%RECIPE_CACHE_DIR%/unpack</string>
             </dict>
@@ -64,24 +64,12 @@
                 <string>%RECIPE_CACHE_DIR%/payload</string>
                 <key>installs_item_paths</key>
                 <array>
-                    <string>/usr/local/outset/login-every/copy-backboard.sh</string>
-                    <string>/Library/Management/BlackbaordCollaborate/Blackboard Collaborate Launcher.app</string>
+                    <string>/usr/local/outset/login-every/copy-blackboard.sh</string>
+                    <string>/Library/Management/BlackboardCollaborate/Blackboard Collaborate Launcher.app</string>
                 </array>
             </dict>
             <key>Processor</key>
             <string>MunkiInstallsItemsCreator</string>
-        </dict>
-        <dict>
-            <key>Arguments</key>
-            <dict>
-                <key>path_list</key>
-                <array>
-                    <string>%RECIPE_CACHE_DIR%/unpack</string>
-                    <string>%RECIPE_CACHE_DIR%/payload</string>
-                </array>
-            </dict>
-            <key>Processor</key>
-            <string>PathDeleter</string>
         </dict>
                 <dict>
             <key>Processor</key>
@@ -95,12 +83,24 @@
             <key>Arguments</key>
             <dict>
                 <key>pkg_path</key>
-                <string>%pathname%</string>
+                <string>%pkg_path%</string>
                 <key>repo_subdirectory</key>
                 <string>%MUNKI_REPO_SUBDIR%</string>
             </dict>
             <key>Processor</key>
             <string>MunkiImporter</string>
+        </dict>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>path_list</key>
+                <array>
+                    <!--string>%RECIPE_CACHE_DIR%/unpack</string-->
+                    <!--string>%RECIPE_CACHE_DIR%/payload</string-->
+                </array>
+            </dict>
+            <key>Processor</key>
+            <string>PathDeleter</string>
         </dict>
     </array>
 </dict>

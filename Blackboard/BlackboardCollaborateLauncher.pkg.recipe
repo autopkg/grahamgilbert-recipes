@@ -129,7 +129,6 @@
             <dict>
                 <key>path_list</key>
                 <array>
-                    <string>%RECIPE_CACHE_DIR%/downloads/%NAME%.zip</string>
                     <string>%pkgroot%</string>
                 </array>
             </dict>
