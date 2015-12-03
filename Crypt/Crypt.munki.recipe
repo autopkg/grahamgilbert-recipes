@@ -28,7 +28,7 @@
         </dict>
     </dict>
     <key>MinimumVersion</key>
-    <string>0.2.0</string>
+    <string>0.5.0</string>
     <key>ParentRecipe</key>
     <string>com.github.grahamgilbert.Crypt.download</string>
     <key>Process</key>
@@ -89,7 +89,6 @@
             <dict>
             </dict>
         </dict>
-
         <dict>
             <key>Arguments</key>
             <dict>
