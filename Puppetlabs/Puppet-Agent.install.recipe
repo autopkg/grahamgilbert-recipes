@@ -3,13 +3,13 @@
 <plist version="1.0">
     <dict>
         <key>Description</key>
-        <string>Uses parent pkg recipe to download latest Outset and installs it.</string>
+        <string>Uses parent pkg recipe to download latest Puppet-Agent and installs it.</string>
         <key>Identifier</key>
-        <string>com.github.grahamgilbert.install.outset</string>
+        <string>com.github.grahamgilbert.install.puppet-agent</string>
         <key>MinimumVersion</key>
         <string>0.4.0</string>
         <key>ParentRecipe</key>
-        <string>com.github.grahamgilbert.download.outset</string>
+        <string>com.github.autopkg.download.puppet-agent</string>
         <key>Input</key>
         <dict>
         </dict>
