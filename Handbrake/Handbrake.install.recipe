@@ -9,7 +9,7 @@
         <key>MinimumVersion</key>
         <string>0.4.1</string>
         <key>ParentRecipe</key>
-        <string>com.github.autopkg.pkg.handbrake</string>
+        <string>com.github.autopkg.pkg.Handbrake</string>
         <key>Input</key>
         <dict>
         </dict>
