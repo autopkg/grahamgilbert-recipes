@@ -15,7 +15,7 @@
         </dict>
         <key>Process</key>
         <array>
-            dict>
+            <dict>
     			<key>Arguments</key>
     			<dict>
     				<key>archive_path</key>
