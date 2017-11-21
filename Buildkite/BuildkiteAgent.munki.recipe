@@ -22,6 +22,11 @@
             </array>
             <key>name</key>
             <string>%NAME%</string>
+            <key>postinstall_script</key>
+            <string>#!/bin/bash
+ killall buildkite-agent
+ exit 0
+            </string>
             <key>unattended_install</key>
             <true/>
         </dict>
