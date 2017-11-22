@@ -24,7 +24,7 @@
             <string>%NAME%</string>
             <key>postinstall_script</key>
             <string>#!/bin/bash
-pid=$(pgrep -f "buildkite-agent start") && kill $pid
+pkill -f "buildkite-agent start"
 exit 0
             </string>
             <key>unattended_install</key>
