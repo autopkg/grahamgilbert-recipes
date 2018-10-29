@@ -238,7 +238,7 @@ def main():
     below is auto-substituted by AutoPkg - if you are adding this installcheck manually,
     be sure to insert the proper version number.'''
 
-    pkg_vers = %version%
+    pkg_vers = '%version%'
 
     install_items = ['/Library/Security/SecurityAgentPlugins/Crypt.bundle',
                      '/Library/LaunchDaemons/com.grahamgilbert.crypt.plist',
