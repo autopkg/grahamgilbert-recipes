@@ -64,7 +64,7 @@ class ShardOverTimeProcessor(Processor):
             time_90 = start_date + (time_increment * 9)
             time_100 = start_date + (time_increment * 10)
 
-            output_string = """({} >= 10 AND date &gt; CAST("{}", "NSDate")) OR {} &lt;= 20 AND date &gt; CAST("{}", "NSDate")) OR {} &lt;= 30 AND date &gt; CAST("{}", "NSDate")) OR {} &lt;= 40 AND date &gt; CAST("{}", "NSDate")) OR {} &lt;= 50 AND date &gt; CAST("{}", "NSDate")) OR {} &lt;= 60 AND date &gt; CAST("{}", "NSDate")) OR {} &lt;= 70 AND date &gt; CAST("{}", "NSDate")) OR {} &lt;= 80 AND date &gt; CAST("{}", "NSDate")) OR {} &lt;= 90 AND date &gt; CAST("{}", "NSDate")) OR {} &lt;= 100 AND date &gt; CAST("{}", "NSDate"))
+            output_string = """({} <= 10 AND date > CAST("{}", "NSDate")) OR {} <= 20 AND date > CAST("{}", "NSDate")) OR {} <= 30 AND date > CAST("{}", "NSDate")) OR {} <= 40 AND date > CAST("{}", "NSDate")) OR {} <= 50 AND date > CAST("{}", "NSDate")) OR {} <= 60 AND date > CAST("{}", "NSDate")) OR {} <= 70 AND date > CAST("{}", "NSDate")) OR {} <= 80 AND date > CAST("{}", "NSDate")) OR {} <= 90 AND date > CAST("{}", "NSDate")) OR {} <= 100 AND date > CAST("{}", "NSDate"))
             """.format(condition, time_10.strftime(date_format), condition, time_20.strftime(date_format), condition, time_30.strftime(date_format), condition, time_40.strftime(date_format), condition, time_50.strftime(date_format), condition, time_60.strftime(date_format), condition, time_70.strftime(date_format), condition, time_80.strftime(date_format), condition, time_90.strftime(date_format), condition, time_100.strftime(date_format))
 
             self.env["installable_condition"] = output_string
