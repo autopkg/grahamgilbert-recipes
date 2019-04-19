@@ -6,7 +6,7 @@
     <string>This processor will add an installable condition to Munki pkginfo files to roll updates out over a period of time based on a integer value of a configurable condition.
     </string>
     <key>Identifier</key>
-    <string>com.github.grahamgilbert.ShardOverTimeProcessor</string>
+    <string>com.github.grahamgilbert.recipes.ShardOverTimeProcessor</string>
     <key>Input</key>
     <dict/>
     <key>MinimumVersion</key>
