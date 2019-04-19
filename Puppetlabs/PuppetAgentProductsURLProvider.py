@@ -85,7 +85,7 @@ class PuppetAgentProductsURLProvider(Processor):
 
         # sort to get the highest version
         highest = candidates[0]
-        if  len(candidates) > 1:
+        if len(candidates) > 1:
             for prod in candidates:
                 if LooseVersion(prod[1]) > LooseVersion(highest[1]):
                     highest = prod
