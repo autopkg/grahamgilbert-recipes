@@ -104,7 +104,7 @@ class ShardOverTimeProcessor(Processor):
                     print("group: {} deploy_time: {}".format(group, deploy_time))
                     output_string += "({} <= {} AND date > CAST(\"{}\", \"NSDate\")) OR ".format(condition, group, deploy_time.strftime(date_format))
                     current_deploy_date = deploy_time
-                output_string = output_string[:-3]
+                output_string = output_string[:-4]
                 output_string += ")"
             else:
                 # How many do we increment by for each group?
