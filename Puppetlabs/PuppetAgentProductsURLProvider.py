@@ -15,11 +15,17 @@
 # limitations under the License.
 """See docstring for PuppetlabsProductsURLProvider class"""
 
-import urllib2
+from __future__ import absolute_import
+
 import re
 from distutils.version import LooseVersion
 
 from autopkglib import Processor, ProcessorError
+
+try:
+    from urllib.request import urlopen  # For Python 3
+except ImportError:
+    from urllib2 import urlopen  # For Python 2
 
 __all__ = ["PuppetAgentProductsURLProvider"]
 
@@ -72,7 +78,7 @@ class PuppetAgentProductsURLProvider(Processor):
         re_download = ("href=\"(puppet-agent-(%s)-1.osx(%s).dmg)\"" % (version_re, os_version))
 
         try:
-            data = urllib2.urlopen(download_url).read()
+            data = urlopen(download_url).read()
         except BaseException as err:
             raise ProcessorError(
                 "Unexpected error retrieving download index: '%s'" % err)
