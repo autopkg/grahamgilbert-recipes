@@ -3,12 +3,12 @@
 
 """See docstring for ShardOverTimeProcessor class"""
 
-from __future__ import absolute_import
-from __future__ import print_function
-import os
+from __future__ import absolute_import, division, print_function
+
 import datetime
-from autopkglib import Processor, ProcessorError
 import sys
+
+from autopkglib import Processor, ProcessorError
 
 __all__ = ["ShardOverTimeProcessor"]
 
