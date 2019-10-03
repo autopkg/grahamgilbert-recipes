@@ -5,7 +5,7 @@
 	<key>Description</key>
 	<string>Installs the latest version of Google Backup and Sync.</string>
 	<key>Identifier</key>
-	<string>biz.airbnb.install.BackupandSync</string>
+	<string>com.github.grahamgilbert.install.BackupandSync</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
