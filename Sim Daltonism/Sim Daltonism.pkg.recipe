@@ -5,7 +5,7 @@
 	<key>Description</key>
 	<string>Downloads the latest version of Sim Daltonism and creates a package.</string>
 	<key>Identifier</key>
-	<string>com.github.grahamgilbert.pkg.SimDaltonism</string>
+	<string>com.github.grahamgilbert.SimDaltonism.pkg</string>
 	<key>Input</key>
 	<dict>
 		<key>BUNDLE_ID</key>
@@ -16,7 +16,7 @@
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.grahamgilbert.download.SimDaltonism</string>
+	<string>com.github.grahamgilbert.SimDaltonism.download</string>
 	<key>Process</key>
 	<array>
 		<dict>
