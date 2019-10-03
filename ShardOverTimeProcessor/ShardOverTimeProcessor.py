@@ -3,10 +3,12 @@
 
 """See docstring for ShardOverTimeProcessor class"""
 
-import os
+from __future__ import absolute_import, division, print_function
+
 import datetime
-from autopkglib import Processor, ProcessorError
 import sys
+
+from autopkglib import Processor, ProcessorError
 
 __all__ = ["ShardOverTimeProcessor"]
 
@@ -52,8 +54,8 @@ class ShardOverTimeProcessor(Processor):
                 # It's a sunday
                 return the_date.replace(hour=9, minute=00) + datetime.timedelta(days=1)
             elif the_date.hour not in range(9,18):
-                print("{} is not between 9 and 18".format(the_date))
-                print("Sending {} back to next_working_day".format(the_date.replace(hour=9, minute=00) + datetime.timedelta(days=1)))
+                print(("{} is not between 9 and 18".format(the_date)))
+                print(("Sending {} back to next_working_day".format(the_date.replace(hour=9, minute=00) + datetime.timedelta(days=1))))
                 # The time is not in working hours, call ourself with tomorrow as the date
                 return self.next_working_day(the_date.replace(hour=9, minute=00) + datetime.timedelta(days=1))
             else:
@@ -101,7 +103,7 @@ class ShardOverTimeProcessor(Processor):
                 for group in range(0, 10):
                     group = (group + 1) * 10
                     deploy_time = self.next_working_day(current_deploy_date + increment)
-                    print("group: {} deploy_time: {}".format(group, deploy_time))
+                    print(("group: {} deploy_time: {}".format(group, deploy_time)))
                     output_string += "({} <= {} AND date > CAST(\"{}\", \"NSDate\")) OR ".format(condition, group, deploy_time.strftime(date_format))
                     current_deploy_date = deploy_time
                 output_string = output_string[:-4]
