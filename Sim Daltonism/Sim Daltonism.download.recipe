@@ -5,7 +5,7 @@
 	<key>Description</key>
 	<string>Downloads the latest version of Sim Daltonism.</string>
 	<key>Identifier</key>
-	<string>com.github.grahamgilbert.download.SimDaltonism</string>
+	<string>com.github.grahamgilbert.SimDaltonism.download</string>
 	<key>Input</key>
 	<dict>
 		<key>DOWNLOAD_URL</key>
