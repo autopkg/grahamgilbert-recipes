@@ -36,7 +36,8 @@ class PuppetAgentProductsURLProvider(URLGetter):
         "product_version": {
             "required": False,
             "description":
-                "Major version of the AIO installer. Either 5 or 6 at present. Defaults to %s".format(DEFAULT_PRODUCT_VERSION),
+                "Major version of the AIO installer. Either 5 or 6 at "
+                "present. Defaults to %s" % DEFAULT_PRODUCT_VERSION,
         },
         "get_version": {
             "required": False,
