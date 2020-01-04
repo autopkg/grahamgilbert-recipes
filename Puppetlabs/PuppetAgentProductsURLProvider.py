@@ -20,12 +20,7 @@ from __future__ import absolute_import
 import re
 from distutils.version import LooseVersion
 
-from autopkglib import Processor, ProcessorError
-
-try:
-    from urllib.request import urlopen  # For Python 3
-except ImportError:
-    from urllib2 import urlopen  # For Python 2
+from autopkglib import Processor, ProcessorError, URLGetter
 
 __all__ = ["PuppetAgentProductsURLProvider"]
 
@@ -34,7 +29,7 @@ DEFAULT_VERSION = "latest"
 DEFAULT_PRODUCT_VERSION = "5"
 OS_VERSION = "10.12"
 
-class PuppetAgentProductsURLProvider(Processor):
+class PuppetAgentProductsURLProvider(URLGetter):
     """Extracts a URL for a Puppet Labs item."""
     description = __doc__
     input_variables = {
@@ -78,7 +73,7 @@ class PuppetAgentProductsURLProvider(Processor):
         re_download = ("href=\"(puppet-agent-(%s)-1.osx(%s).dmg)\"" % (version_re, os_version))
 
         try:
-            data = urlopen(download_url).read()
+            data = self.download(download_url)
         except BaseException as err:
             raise ProcessorError(
                 "Unexpected error retrieving download index: '%s'" % err)
