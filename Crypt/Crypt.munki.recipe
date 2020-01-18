@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the current release of Crypt client scripts from Github and imports into Munki.
+    <string>Downloads the current release of Crypt from Github and imports into Munki.
     </string>
     <key>Identifier</key>
     <string>com.github.grahamgilbert.Crypt.munki</string>
@@ -23,8 +23,135 @@
             <string>Crypt is a Filevault 2 Escrow solution.</string>
             <key>name</key>
             <string>%NAME%</string>
+	    <key>minimum_os_version</key>
+	    <string>10.12</string>
             <key>unattended_install</key>
             <true/>
+            <key>preuninstall_script</key>
+	        <string>#!/usr/bin/python
+
+        # Copyright 2015 Crypt Project.
+        #
+        # Licensed under the Apache License, Version 2.0 (the "License");
+        # you may not use this file except in compliance with the License.
+        # You may obtain a copy of the License at
+        #
+        # http://www.apache.org/licenses/LICENSE-2.0
+        #
+        # Unless required by applicable law or agreed to in writing, software
+        # distributed under the License is distributed on an "AS IS" BASIS,
+        # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        # See the License for the specific language governing permissions and
+        # limitations under the License.
+
+        import  os,     \
+                sys,     \
+                plistlib,  \
+                platform,   \
+                subprocess
+        from    subprocess import Popen, \
+                                  PIPE,   \
+                                  STDOUT
+
+        ##
+        ## mech_list: A list of strings. The list of mechs to add
+        ## index_mech: A string. The mech already in the DB, your mech_list will be installed above or below the index_mech
+        ## index_offset: An integer. Used to position the mech_list above or below the index_mech. 0 will be directly above,
+        ## 1 will be directly below. -1 would have one space between the mech_list and the index_mech etc...
+        ##
+
+        ##
+        ## Currently the FV2AuthPlugin only runs at the Login Window.
+        ## I may add support for Screen Saver unlock. There are stubs for
+        ## the authenticate db in place because of this.
+        ##
+
+        ## Path to system.login.console.plist
+        system_login_console_plist = "/private/var/tmp/system.login.console.plist"
+
+        ## Path to authenticate.plist
+        #authenticate_plist = "/private/var/tmp/authenticate.plist"
+
+        ## Mechs that support FV2AuthPlugin
+        fv2_mechs = ["Crypt:Check,privileged","Crypt:CryptGUI","Crypt:Enablement,privileged"]
+        fv2_index_mech = "loginwindow:done"
+        fv2_index_offset = 0
+
+        def bash_command(script):
+            try:
+                return subprocess.check_output(script)
+            except (subprocess.CalledProcessError, OSError), err:
+                sys.exit("[* Error] **%s** [%s]" % (err, str(script)))
+
+        def remove_mechs_in_db(db, mech_list):
+            for mech in mech_list:
+                for old_mech in filter(lambda x: mech in x, db['mechanisms']):
+                    db['mechanisms'].remove(old_mech)
+            return db
+
+        def set_mechs_in_db(db, mech_list, index_mech, index_offset):
+            ## Clear away any previous configs
+            db = remove_mechs_in_db(db, mech_list)
+
+            ## Add mech_list to db
+            # i = int(db['mechanisms'].index(index_mech)) + index_offset
+            # for mech in mech_list:
+            #     db['mechanisms'].insert(i, mech)
+            #     i += 1
+            return db
+
+        def edit_authdb():
+            ## Export "system.login.console"
+            system_login_console = bash_command(["/usr/bin/security", "authorizationdb", "read", "system.login.console"])
+            f_c = open(system_login_console_plist, 'w')
+            f_c.write(system_login_console)
+            f_c.close()
+
+            ## Export "authenticate"
+            #authenticate = bash_command(["/usr/bin/security", "authorizationdb", "read", "authenticate"])
+            #f_a = open(authenticate_plist, 'w')
+            #f_a.write(authenticate)
+            #f_a.close()
+
+            ## Leave the for loop. Possible support for ScreenSaver unlock
+            for p in [system_login_console_plist]:
+                ## Parse the plist
+                d = plistlib.readPlist(p)
+
+                ## Add FV2 mechs
+                d = set_mechs_in_db(d, fv2_mechs, fv2_index_mech, fv2_index_offset)
+
+                ## Write out the changes
+                plistlib.writePlist(d, p)
+
+            f_c = open(system_login_console_plist, "r")
+            p = Popen(["/usr/bin/security", "authorizationdb", "write", "system.login.console"], stdout=PIPE, stdin=PIPE, stderr=PIPE)
+            stdout_data = p.communicate(input=f_c.read())
+            f_c.close()
+
+            #f_a = open(authenticate_plist, "r")
+            #p = Popen(["/usr/bin/security", "authorizationdb", "write", "authenticate"], stdout=PIPE, stdin=PIPE, stderr=PIPE)
+            #stdout_data = p.communicate(input=f_a.read())
+            #f_a.close()
+
+        def check_root():
+            if not os.geteuid() == 0:
+                sys.exit("\nOnly root can run this script\n")
+
+        def check_os():
+            OSVersion, _, _ = platform.mac_ver()
+            OSVersion = int(OSVersion.split('.')[1])
+            if OSVersion &lt; 9:
+                sys.exit("\nOnly OS X 10.9 and above can run this script\n")
+
+        def main(argv):
+            check_root()
+            check_os()
+            edit_authdb()
+
+        if __name__ == '__main__':
+            main(sys.argv)
+        </string>
         </dict>
     </dict>
     <key>MinimumVersion</key>
@@ -48,7 +175,7 @@
             <key>Arguments</key>
             <dict>
                 <key>pkg_payload_path</key>
-                <string>%RECIPE_CACHE_DIR%/unpack/Payload</string>
+                <string>%RECIPE_CACHE_DIR%/unpack/Crypt.pkg/Payload</string>
                 <key>destination_path</key>
                 <string>%RECIPE_CACHE_DIR%/payload</string>
             </dict>
@@ -58,17 +185,11 @@
         <dict>
             <key>Arguments</key>
             <dict>
-                <key>faux_root</key>
-                <string>%RECIPE_CACHE_DIR%/payload</string>
-                <key>installs_item_paths</key>
-                <array>
-                    <string>/Library/LaunchDaemons/com.grahamgilbert.crypt.needsescrow.plist</string>
-                    <string>/usr/local/crypt/delayed_escrow</string>
-                    <string>/usr/local/crypt/Crypt.app</string>
-                </array>
+                <key>input_plist_path</key>
+                <string>%RECIPE_CACHE_DIR%/payload/Library/Security/SecurityAgentPlugins/Crypt.bundle/Contents/Info.plist</string>
             </dict>
             <key>Processor</key>
-            <string>MunkiInstallsItemsCreator</string>
+            <string>Versioner</string>
         </dict>
         <dict>
             <key>Arguments</key>
@@ -87,6 +208,67 @@
             <string>MunkiPkginfoMerger</string>
             <key>Arguments</key>
             <dict>
+                <key>additional_pkginfo</key>
+                <dict>
+                    <key>installcheck_script</key>
+                    <string>#!/usr/bin/python
+
+'''This installcheck script template evaluates the installed version
+of Crypt as well as if Crypt is included properly in the authdb.'''
+
+from subprocess import check_output
+from distutils.version import StrictVersion
+import plistlib
+import os
+
+def get_mechs():
+    '''returns a list of all current authdb mechs'''
+    cmd = ["/usr/bin/security", "authorizationdb", "read", "system.login.console"]
+    cur_mech_plist = plistlib.readPlistFromString(check_output(cmd))
+    mechs_only = cur_mech_plist['mechanisms']
+    return mechs_only
+
+def get_crypt_vers():
+    '''returns the installed version of the Crypt bundle'''
+    plist = plistlib.readPlist("/Library/Security/SecurityAgentPlugins/Crypt.bundle/Contents/Info.plist")
+    return plist["CFBundleShortVersionString"]
+
+def main():
+    '''Checks if Crypt is properly installed and up to date. Note that the version var
+    below is auto-substituted by AutoPkg - if you are adding this installcheck manually,
+    be sure to insert the proper version number.'''
+
+    pkg_vers = '%version%'
+
+    install_items = ['/Library/Security/SecurityAgentPlugins/Crypt.bundle',
+                     '/Library/LaunchDaemons/com.grahamgilbert.crypt.plist',
+                     '/Library/Crypt/checkin',
+                     '/Library/Security/SecurityAgentPlugins/Crypt.bundle']
+    for item in install_items:
+        if not os.path.exists(item):
+            # we are missing a needed file - Crypt is damaged or not installed
+            exit(0)
+
+    # check if Crypt is up to date
+    installed_vers = get_crypt_vers()
+    if StrictVersion(installed_vers) &lt; StrictVersion(pkg_vers):
+        # we are out of date compared to the pkg version
+        exit(0)
+
+    mechs = ['Crypt:Check,privileged', 'Crypt:CryptGUI', 'Crypt:Enablement,privileged']
+    current_mechs = get_mechs()
+    for crypt_mech in mechs:
+        if not crypt_mech in current_mechs:
+            # mechs are not in place
+            exit(0)
+
+    # all mechs in place and version is up to date
+    exit(1)
+
+if __name__ == "__main__":
+    main()
+				</string>
+				</dict>
             </dict>
         </dict>
         <dict>
