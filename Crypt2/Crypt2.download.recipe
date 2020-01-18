@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the current release of Crypt2 client from Github.</string>
+    <string>Downloads the current release of Crypt client from Github.</string>
     <key>Identifier</key>
     <string>com.github.grahamgilbert.Crypt2.download</string>
     <key>Input</key>
@@ -11,28 +11,12 @@
         <key>NAME</key>
         <string>Crypt2</string>
     </dict>
-    <key>MinimumVersion</key>
+	<key>MinimumVersion</key>
     <string>0.5.0</string>
+    <key>ParentRecipe</key>
+    <string>com.github.grahamgilbert.Crypt.download</string>
     <key>Process</key>
     <array>
-        <dict>
-            <key>Processor</key>
-            <string>GitHubReleasesInfoProvider</string>
-            <key>Arguments</key>
-            <dict>
-                <key>github_repo</key>
-                <string>grahamgilbert/crypt</string>
-            </dict>
-        </dict>
-        <dict>
-            <key>Processor</key>
-            <string>URLDownloader</string>
-            <key>Arguments</key>
-            <dict>
-                <key>filename</key>
-                <string>%NAME%.pkg</string>
-            </dict>
-        </dict>
         <dict>
             <key>Processor</key>
             <string>EndOfCheckPhase</string>
