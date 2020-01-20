@@ -74,7 +74,7 @@ class PuppetAgentProductsURLProvider(URLGetter):
         re_download = ("href=\"(puppet-agent-(%s)-1.osx(%s).dmg)\"" % (version_re, os_version))
 
         try:
-            data = self.download(download_url)
+            data = self.download(download_url, text=True)
         except BaseException as err:
             raise ProcessorError(
                 "Unexpected error retrieving download index: '%s'" % err)
