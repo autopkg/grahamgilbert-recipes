@@ -25,7 +25,7 @@
 					<string>testing</string>
 				</array>
 				<key>description</key>
-				<stringChrome is a fast, simple, and secure web browser, built for the modern web.</string>
+				<string>Chrome is a fast, simple, and secure web browser, built for the modern web.</string>
 				<key>developer</key>
 				<string>Google</string>
 				<key>display_name</key>
