@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the latest version of the Google Chrome Enterprise Paclage.</string>
+	<string>Downloads the latest version of the Google Chrome Enterprise Package.</string>
 	<key>Identifier</key>
 	<string>com.github.grahamgilbert.download.GoogleChromeEnterprise</string>
 	<key>Input</key>
