@@ -13,6 +13,8 @@
         <string>apps/Crypt</string>
         <key>NAME</key>
         <string>Crypt2</string>
+        <key>PYTHON3PATH</key>
+        <string>/usr/local/munki/python</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -23,12 +25,12 @@
             <string>Crypt is a Filevault 2 Escrow solution.</string>
             <key>name</key>
             <string>%NAME%</string>
-	    <key>minimum_os_version</key>
-	    <string>10.12</string>
+        <key>minimum_os_version</key>
+        <string>10.12</string>
             <key>unattended_install</key>
             <true/>
             <key>preuninstall_script</key>
-	        <string>#!/usr/bin/python
+            <string>#!/usr/bin/python
 
         # Copyright 2015 Crypt Project.
         #
@@ -211,35 +213,39 @@
                 <key>additional_pkginfo</key>
                 <dict>
                     <key>installcheck_script</key>
-                    <string>#!/usr/bin/python
+                    <string>#!%PYTHON3PATH%
 
 '''This installcheck script template evaluates the installed version
 of Crypt as well as if Crypt is included properly in the authdb.'''
-
 from subprocess import check_output
 from distutils.version import StrictVersion
 import plistlib
 import os
-
 def get_mechs():
     '''returns a list of all current authdb mechs'''
     cmd = ["/usr/bin/security", "authorizationdb", "read", "system.login.console"]
-    cur_mech_plist = plistlib.readPlistFromString(check_output(cmd))
+    cur_mech_plist = plistlib.loads(check_output(cmd))
     mechs_only = cur_mech_plist['mechanisms']
     return mechs_only
-
 def get_crypt_vers():
     '''returns the installed version of the Crypt bundle'''
-    plist = plistlib.readPlist("/Library/Security/SecurityAgentPlugins/Crypt.bundle/Contents/Info.plist")
+    try:
+        f = open("/Library/Security/SecurityAgentPlugins/Crypt.bundle/Contents/Info.plist", 'rb')
+    except:
+        print("Unable to open Crypt bundle to get version")
+        exit(0)
+    try:    
+        plist = plistlib.load(f)
+    except:
+        print("Unable to get plist info from Crypt bundle")
+        exit(0)
+    f.close()
     return plist["CFBundleShortVersionString"]
-
 def main():
     '''Checks if Crypt is properly installed and up to date. Note that the version var
     below is auto-substituted by AutoPkg - if you are adding this installcheck manually,
     be sure to insert the proper version number.'''
-
     pkg_vers = '%version%'
-
     install_items = ['/Library/Security/SecurityAgentPlugins/Crypt.bundle',
                      '/Library/LaunchDaemons/com.grahamgilbert.crypt.plist',
                      '/Library/Crypt/checkin',
@@ -248,27 +254,23 @@ def main():
         if not os.path.exists(item):
             # we are missing a needed file - Crypt is damaged or not installed
             exit(0)
-
     # check if Crypt is up to date
     installed_vers = get_crypt_vers()
     if StrictVersion(installed_vers) &lt; StrictVersion(pkg_vers):
         # we are out of date compared to the pkg version
         exit(0)
-
     mechs = ['Crypt:Check,privileged', 'Crypt:CryptGUI', 'Crypt:Enablement,privileged']
     current_mechs = get_mechs()
     for crypt_mech in mechs:
         if not crypt_mech in current_mechs:
             # mechs are not in place
             exit(0)
-
     # all mechs in place and version is up to date
     exit(1)
-
 if __name__ == "__main__":
     main()
-				</string>
-				</dict>
+                </string>
+                </dict>
             </dict>
         </dict>
         <dict>
