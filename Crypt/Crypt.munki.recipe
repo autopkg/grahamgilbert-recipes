@@ -150,7 +150,7 @@
     <key>MinimumVersion</key>
     <string>0.5.0</string>
     <key>ParentRecipe</key>
-    <string>com.github.grahamgilbert.Crypt2.download</string>
+    <string>com.github.grahamgilbert.Crypt.download</string>
     <key>Process</key>
     <array>
         <dict>
