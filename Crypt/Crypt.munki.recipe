@@ -14,7 +14,7 @@
         <key>NAME</key>
         <string>Crypt2</string>
         <key>PYTHON3PATH</key>
-        <string>/usr/local/munki/python</string>
+        <string>/usr/local/munki/munki-python</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -30,7 +30,7 @@
             <key>unattended_install</key>
             <true/>
             <key>preuninstall_script</key>
-	        <string>#!/usr/bin/python
+	        <string>#!%PYTHON3PATH%
 
         # Copyright 2015 Crypt Project.
         #
