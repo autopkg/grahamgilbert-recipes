@@ -14,7 +14,7 @@
         <key>NAME</key>
         <string>Crypt2</string>
         <key>PYTHON3PATH</key>
-        <string>/usr/local/munki/python</string>
+        <string>/usr/local/munki/munki-python</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>
