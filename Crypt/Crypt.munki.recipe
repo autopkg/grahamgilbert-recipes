@@ -25,8 +25,8 @@
             <string>Crypt is a Filevault 2 Escrow solution.</string>
             <key>name</key>
             <string>%NAME%</string>
-	        <key>minimum_os_version</key>
-	        <string>10.14</string>
+            <key>minimum_os_version</key>
+            <string>10.14</string>
             <key>unattended_install</key>
             <true/>
         </dict>
@@ -157,7 +157,7 @@ def main():
 if __name__ == "__main__":
     main()
 </string>
-				    <key>preuninstall_script</key>
+                    <key>preuninstall_script</key>
                     <string>#!/usr/local/munki/munki-python
 
 # Copyright 2015 Crypt Project.
@@ -258,7 +258,7 @@ def main(argv):
 if __name__ == '__main__':
     main(sys.argv)
 </string>
-				</dict>
+                </dict>
             </dict>
         </dict>
         <dict>
