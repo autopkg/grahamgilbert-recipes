@@ -65,25 +65,8 @@
                     <string>/usr/local/munki/postflight</string>
                     <string>/usr/local/munki/preflight</string>
                     <string>/usr/local/munki/postflight.d/sal-postflight</string>
-                    <string>/usr/local/munki/postflight.d/sal-preflight</string>
-                    <string>/usr/local/sal/yaml/__init__.py</string>
-                    <string>/usr/local/sal/yaml/composer.py</string>
-                    <string>/usr/local/sal/yaml/constructor.py</string>
-                    <string>/usr/local/sal/yaml/cyaml.py</string>
-                    <string>/usr/local/sal/yaml/dumper.py</string>
-                    <string>/usr/local/sal/yaml/emitter.py</string>
-                    <string>/usr/local/sal/yaml/error.py</string>
-                    <string>/usr/local/sal/yaml/events.py</string>
-                    <string>/usr/local/sal/yaml/loader.py</string>
-                    <string>/usr/local/sal/yaml/nodes.py</string>
-                    <string>/usr/local/sal/yaml/parser.py</string>
-                    <string>/usr/local/sal/yaml/reader.py</string>
-                    <string>/usr/local/sal/yaml/representer.py</string>
-                    <string>/usr/local/sal/yaml/resolver.py</string>
-                    <string>/usr/local/sal/yaml/scanner.py</string>
-                    <string>/usr/local/sal/yaml/serializer.py</string>
-                    <string>/usr/local/sal/yaml/tokens.py</string>
-                    <string>/usr/local/sal/utils.py</string>
+                    <string>/usr/local/munki/preflight.d/sal-preflight</string>
+                    <string>/usr/local/sal/bin/sal-submit</string>
                 </array>
             </dict>
             <key>Processor</key>

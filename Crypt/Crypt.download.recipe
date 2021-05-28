@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the current release of Crypt client scripts from Github.</string>
+    <string>Downloads the current release of Crypt client from Github.</string>
     <key>Identifier</key>
     <string>com.github.grahamgilbert.Crypt.download</string>
     <key>Input</key>
