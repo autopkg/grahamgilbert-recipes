@@ -66,6 +66,7 @@
                     <string>/usr/local/munki/preflight</string>
                     <string>/usr/local/munki/postflight.d/sal-postflight</string>
                     <string>/usr/local/munki/preflight.d/sal-preflight</string>
+                    <string>/usr/local/sal/bin/sal-submit</string>
                 </array>
             </dict>
             <key>Processor</key>

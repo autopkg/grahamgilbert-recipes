@@ -13,6 +13,8 @@
         <string>apps/Crypt</string>
         <key>NAME</key>
         <string>Crypt2</string>
+        <key>PYTHON3PATH</key>
+        <string>/usr/local/munki/python</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -204,7 +206,7 @@
                 <key>additional_pkginfo</key>
                 <dict>
                     <key>installcheck_script</key>
-                    <string>#!/usr/bin/python
+                    <string>#!%PYTHON3PATH%
 
 '''This installcheck script template evaluates the installed version
 of Crypt as well as if Crypt is included properly in the authdb.'''
@@ -217,13 +219,23 @@ import os
 def get_mechs():
     '''returns a list of all current authdb mechs'''
     cmd = ["/usr/bin/security", "authorizationdb", "read", "system.login.console"]
-    cur_mech_plist = plistlib.readPlistFromString(check_output(cmd))
+    cur_mech_plist = plistlib.loads(check_output(cmd))
     mechs_only = cur_mech_plist['mechanisms']
     return mechs_only
 
 def get_crypt_vers():
     '''returns the installed version of the Crypt bundle'''
-    plist = plistlib.readPlist("/Library/Security/SecurityAgentPlugins/Crypt.bundle/Contents/Info.plist")
+    try:
+        f = open("/Library/Security/SecurityAgentPlugins/Crypt.bundle/Contents/Info.plist", 'rb')
+    except:
+        print("Unable to open Crypt bundle to get version")
+        exit(0)
+    try:    
+        plist = plistlib.load(f)
+    except:
+        print("Unable to get plist info from Crypt bundle")
+        exit(0)
+    f.close()
     return plist["CFBundleShortVersionString"]
 
 def main():
