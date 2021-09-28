@@ -10,6 +10,8 @@
     <dict>
         <key>NAME</key>
         <string>Crypt</string>
+        <key>PRERELEASE</key>
+        <string></string>
     </dict>
     <key>MinimumVersion</key>
     <string>0.5.0</string>
@@ -22,6 +24,8 @@
             <dict>
                 <key>github_repo</key>
                 <string>grahamgilbert/crypt</string>
+                <key>include_prereleases</key>
+                <string>%PRERELEASE%</string>
             </dict>
         </dict>
         <dict>
