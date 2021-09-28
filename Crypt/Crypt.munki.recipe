@@ -170,7 +170,7 @@
             <key>Arguments</key>
             <dict>
                 <key>pkg_payload_path</key>
-                <string>%RECIPE_CACHE_DIR%/unpack/Crypt.pkg/Payload</string>
+                <string>%RECIPE_CACHE_DIR%/unpack/Payload</string>
                 <key>destination_path</key>
                 <string>%RECIPE_CACHE_DIR%/payload</string>
             </dict>
@@ -230,7 +230,7 @@ def get_crypt_vers():
     except:
         print("Unable to open Crypt bundle to get version")
         exit(0)
-    try:    
+    try:
         plist = plistlib.load(f)
     except:
         print("Unable to get plist info from Crypt bundle")
