@@ -39,12 +39,23 @@
         <dict>
             <key>Arguments</key>
             <dict>
+                <key>flat_pkg_path</key>
+                <string>%pkg_path%</string>
+                <key>destination_path</key>
+                <string>%RECIPE_CACHE_DIR%/unpack</string>
+            </dict>
+            <key>Processor</key>
+            <string>FlatPkgUnpacker</string>
+        </dict>
+        <dict>
+            <key>Arguments</key>
+            <dict>
                 <key>installs_item_paths</key>
                 <array>
                     <string>/Applications/LogiTune.app</string>
                 </array>
                 <key>faux_root</key>
-                <string>%RECIPE_CACHE_DIR%/pkgroot</string>
+                <string>%RECIPE_CACHE_DIR%/unpack</string>
                 <key>version_comparison_key</key>
                 <string>CFBundleShortVersionString</string>
             </dict>
