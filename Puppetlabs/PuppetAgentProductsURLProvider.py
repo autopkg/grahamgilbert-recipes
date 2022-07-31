@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/autopkg/python
 #
 # Copyright 2015 Timothy Sutton, w/ insignificant contributions by Allister Banks
 #
@@ -29,30 +29,32 @@ DEFAULT_VERSION = "latest"
 DEFAULT_PRODUCT_VERSION = "5"
 OS_VERSION = "10.12"
 
+
 class PuppetAgentProductsURLProvider(URLGetter):
     """Extracts a URL for a Puppet Labs item."""
+
     description = __doc__
     input_variables = {
         "product_version": {
             "required": False,
-            "description":
-                "Major version of the AIO installer. Either 5 or 6 at "
-                "present. Defaults to %s" % DEFAULT_PRODUCT_VERSION,
+            "description": "Major version of the AIO installer. Either 5 or 6 at "
+            "present. Defaults to %s" % DEFAULT_PRODUCT_VERSION,
         },
         "get_version": {
             "required": False,
-            "description":
-                ("Specific version to request. Defaults to '%s', which "
-                 "automatically finds the highest available release version."
-                 % (DEFAULT_VERSION)),
+            "description": (
+                "Specific version to request. Defaults to '%s', which "
+                "automatically finds the highest available release version."
+                % (DEFAULT_VERSION)
+            ),
         },
         "get_os_version": {
             "required": False,
-            "description":
-                ("When fetching the puppet-agent, collection-style pkg, "
-                 "designates OS. Defaults to '%s'. Currently only 10.9 "
-                 "or 10.10 packages are available."
-                 % (OS_VERSION)),
+            "description": (
+                "When fetching the puppet-agent, collection-style pkg, "
+                "designates OS. Defaults to '%s'. Currently only 10.9 "
+                "or 10.10 packages are available." % (OS_VERSION)
+            ),
         },
     }
     output_variables = {
@@ -69,21 +71,26 @@ class PuppetAgentProductsURLProvider(URLGetter):
         download_url = DL_INDEX
         os_version = self.env.get("get_os_version", OS_VERSION)
         product_version = self.env.get("product_version", DEFAULT_PRODUCT_VERSION)
-        version_re = r"\d+\.\d+\.\d+" # e.g.: 10.10/PC1/x86_64/puppet-agent-1.2.5-1.osx10.10.dmg
+        version_re = (
+            r"\d+\.\d+\.\d+"  # e.g.: 10.10/PC1/x86_64/puppet-agent-1.2.5-1.osx10.10.dmg
+        )
         download_url += str("/puppet" + product_version + "/" + os_version + "/x86_64")
-        re_download = ("href=\"(puppet-agent-(%s)-1.osx(%s).dmg)\"" % (version_re, os_version))
+        re_download = 'href="(puppet-agent-(%s)-1.osx(%s).dmg)"' % (
+            version_re,
+            os_version,
+        )
 
         try:
             data = self.download(download_url, text=True)
         except BaseException as err:
             raise ProcessorError(
-                "Unexpected error retrieving download index: '%s'" % err)
+                "Unexpected error retrieving download index: '%s'" % err
+            )
 
         # (dmg, version)
         candidates = re.findall(re_download, data)
         if not candidates:
-            raise ProcessorError(
-                "Unable to parse any products from download index.")
+            raise ProcessorError("Unable to parse any products from download index.")
 
         # sort to get the highest version
         highest = candidates[0]
