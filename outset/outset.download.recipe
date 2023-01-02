@@ -27,11 +27,6 @@
         <dict>
             <key>Processor</key>
             <string>URLDownloader</string>
-            <key>Arguments</key>
-            <dict>
-                <key>filename</key>
-                <string>%NAME%.pkg</string>
-            </dict>
         </dict>
         <dict>
             <key>Processor</key>
