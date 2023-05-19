@@ -50,7 +50,7 @@
             <key>Arguments</key>
             <dict>
                 <key>pattern</key>
-                <string>%RECIPE_CACHE_DIR%/unpack/outset-*.component.pkg</string>
+                <string>%RECIPE_CACHE_DIR%/unpack/Outset-*.pkg</string>
             </dict>
             <key>Processor</key>
             <string>FileFinder</string>
