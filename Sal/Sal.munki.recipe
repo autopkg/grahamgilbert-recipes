@@ -67,6 +67,7 @@
                     <string>/usr/local/munki/postflight.d/sal-postflight</string>
                     <string>/usr/local/munki/preflight.d/sal-preflight</string>
                     <string>/usr/local/sal/bin/sal-submit</string>
+                    <string>/usr/local/sal/Python.framework/Versions/Current/lib/python3.9/site-packages/sal/version.py</string>
                 </array>
             </dict>
             <key>Processor</key>
