@@ -8,8 +8,6 @@
 	<string>com.github.grahamgilbert.SimDaltonism.pkg</string>
 	<key>Input</key>
 	<dict>
-		<key>BUNDLE_ID</key>
-		<string>com.michelf.sim-daltonism</string>
 		<key>NAME</key>
 		<string>Sim Daltonism</string>
 	</dict>
