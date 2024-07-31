@@ -95,8 +95,8 @@ function exit_if_path_not_exist() {
     fi
 }
 
-function is_version_gt() { 
-    test "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1"; 
+function is_version_gt() {
+    test "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1";
 }
 
 # Make sure the paths exist
