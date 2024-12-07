@@ -109,12 +109,12 @@ checkin_version=$(/Library/Crypt/checkin -version)
 
 desired_version="%version%"
 if is_version_gt $desired_version $plugin_version; then
-    echo "Plugin version is lower than desired version"
+    echo "Plugin version $plugin_version is lower than desired version $desired_version"
     exit 0
 fi
 
 if is_version_gt $desired_version $checkin_version; then
-    echo "Checkin version is lower than desired version"
+    echo "Checkin version $checkin_version is lower than desired version $desired_version"
     exit 0
 fi
 
