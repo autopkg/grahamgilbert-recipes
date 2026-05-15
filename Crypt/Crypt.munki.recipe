@@ -86,7 +86,7 @@
                 <key>additional_pkginfo</key>
                 <dict>
                     <key>installcheck_script</key>
-                    <string>#!/bin/sh
+                    <string>#!/bin/zsh
 
 function exit_if_path_not_exist() {
     if [ ! -e "$1" ]; then
@@ -95,25 +95,30 @@ function exit_if_path_not_exist() {
     fi
 }
 
-function is_version_gt() {
-    test "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1";
-}
-
 # Make sure the paths exist
 exit_if_path_not_exist "/Library/Security/SecurityAgentPlugins/Crypt.bundle"
 exit_if_path_not_exist "/Library/LaunchDaemons/com.grahamgilbert.crypt.plist"
 exit_if_path_not_exist "/Library/Crypt/checkin"
 
 plugin_version=$(defaults read /Library/Security/SecurityAgentPlugins/Crypt.bundle/Contents/Info.plist CFBundleShortVersionString)
-checkin_version=$(/Library/Crypt/checkin -version)
+
+file_type=$(/usr/bin/file -b --mime-type /Library/Crypt/checkin | /usr/bin/sed 's|/.*||')
+
+if [ "$file_type" = "text" ]; then
+    echo "Checkin version is < Crypt 5"
+    exit 0
+else
+    checkin_version=$(/Library/Crypt/checkin -version)
+fi
 
 desired_version="%version%"
-if is_version_gt $desired_version $plugin_version; then
+autoload is-at-least
+if ! is-at-least $desired_version $plugin_version; then
     echo "Plugin version is lower than desired version"
     exit 0
 fi
 
-if is_version_gt $desired_version $checkin_version; then
+if ! is-at-least $desired_version $checkin_version; then
     echo "Checkin version is lower than desired version"
     exit 0
 fi
