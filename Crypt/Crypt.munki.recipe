@@ -105,7 +105,7 @@ plugin_version=$(defaults read /Library/Security/SecurityAgentPlugins/Crypt.bund
 file_type=$(/usr/bin/file -b --mime-type /Library/Crypt/checkin | /usr/bin/sed 's|/.*||')
 
 if [ "$file_type" = "text" ]; then
-    echo "Checkin version is < Crypt 5"
+    echo "Checkin version is &lt; Crypt 5"
     exit 0
 else
     checkin_version=$(/Library/Crypt/checkin -version)
