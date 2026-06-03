@@ -1,0 +1,22 @@
+Description: Generates Munki pkginfos for vulnerable Homebrew formulae from Carafe inventory JSON.
+Identifier: com.github.grahamgilbert.HomebrewVulnerabilities.munki
+MinimumVersion: "0.5.0"
+
+Input:
+  CARAFE_PATH: /opt/macadmins/bin/carafe
+  CATALOG: testing
+  MAPPING_PATH: "%RECIPE_DIR%/homebrew_osv_mappings.json"
+  PKGINFO_OUTPUT_DIR: "%RECIPE_CACHE_DIR%/pkginfos"
+  INVENTORY_PATHS: []
+  INVENTORY_S3_URIS: []
+
+Process:
+  - Processor: HomebrewVulnerabilityPkgInfoCreator
+    Arguments:
+      carafe_path: "%CARAFE_PATH%"
+      catalogs:
+        - "%CATALOG%"
+      inventory_paths: "%INVENTORY_PATHS%"
+      inventory_s3_uris: "%INVENTORY_S3_URIS%"
+      mapping_path: "%MAPPING_PATH%"
+      pkginfo_output_dir: "%PKGINFO_OUTPUT_DIR%"
