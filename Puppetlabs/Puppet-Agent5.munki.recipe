@@ -39,7 +39,7 @@ specifically for each OS, we're setting the 'minimum_os_version' and 'maximum_os
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
-	<string>0.4.1</string>
+	<string>2.0.1</string>
 	<key>ParentRecipe</key>
 	<string>com.github.grahamgilbert.download.puppet-agent5</string>
 	<key>Process</key>
