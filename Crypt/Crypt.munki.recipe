@@ -113,12 +113,12 @@ fi
 
 desired_version="%version%"
 autoload is-at-least
-if ! is-at-least $desired_version $plugin_version; then
+if ! is-at-least "$desired_version" "$plugin_version"; then
     echo "Plugin version is lower than desired version"
     exit 0
 fi
 
-if ! is-at-least $desired_version $checkin_version; then
+if ! is-at-least "$desired_version" "$checkin_version"; then
     echo "Checkin version is lower than desired version"
     exit 0
 fi
